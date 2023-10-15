@@ -1,0 +1,40 @@
+management.endpoints.web.exposure.include: metrics
+management.endpoint.metrics.enabled: true
+
+server:
+  port: 8181
+  compression.enabled: true
+  max-http-header-size: 20000
+
+grpc:
+  server:
+    port: 16777
+    max-inbound-message-size: 20971520
+    max-outbound-message-size: 20971520
+    max-concurrent-streams: 1000
+
+spring:
+  application:
+    name: product-service-grpc
+  output:
+    ansi:
+      enabled: always
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+  jackson:
+    serialization.WRITE_DATES_AS_TIMESTAMPS: false
+    time-zone: UTC
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: ecom
+      collection: product
+      connection-pool:
+        max-size: 500
+        max-wait-time: 20
+        max-connecting: 500
+      repositories:
+        enabled: true
+
+debug: false

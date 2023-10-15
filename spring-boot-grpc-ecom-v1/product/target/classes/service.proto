@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+// options for Java generated sources
+option java_multiple_files = true;
+option java_package = "com.fredyzh.ecom.product.v1.api.proto";
+option java_outer_classname = "GRPCProductService";
+
+option go_package ="github.com/fredyzh/ecom/product/v1/api/proto";
+
+package fredyzh.ecom.product.v1;
+
+import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
+
+service ProductService{
+  rpc Health(google.protobuf.Empty) returns (HealthReply) {
+    option (google.api.http) = {
+      get: "/product/v1/health"
+    };
+  }
+
+  rpc CreateProduct(CreateProductRequest) returns (CreateProductResponse){
+    option (google.api.http) = {
+      post: "/product/v1/createproduct"
+      body: "*"
+    };
+  }
+
+  rpc  ListAllProducts(google.protobuf.Empty) returns (ListAllProductsResponse){
+    option (google.api.http) = {
+      get: "/product/v1/listallproducts"
+    };
+  }
+
+  rpc  getProducts(google.protobuf.Empty) returns (stream Product){
+    option (google.api.http) = {
+      get: "/product/v1/getproducts"
+    };
+  }
+}
+
+message CreateProductRequest{
+    Product product=1;
+}
+
+message CreateProductResponse{
+  string id=1;
+}
+
+message ListAllProductsResponse {
+  repeated  Product products=1;
+}
+
+message HealthReply {
+  bool ok = 1;
+}
+
+message Product{
+  string id=1;
+  string name=2;
+  string description=3;
+  double price=4;
+}

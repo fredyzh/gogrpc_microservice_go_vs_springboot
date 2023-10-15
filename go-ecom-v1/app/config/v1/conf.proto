@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package app.configs.v1;
+
+import "google/protobuf/duration.proto";
+
+option go_package = "github.com/fredyzh/ecom/product/app/configs/v1";
+
+message Bootstrap {
+    Trace trace = 1;
+    Server server = 2;
+    Data data = 3;
+}
+
+message Trace {
+    string endpoint = 1;
+    Loglevel level = 2;
+}
+
+message Server {
+    message HTTP {
+        string network = 3;
+        string addr = 4;
+        int64 port=5;
+        google.protobuf.Duration timeout = 6;
+    }
+    message GRPC {
+        string network = 1;
+        string addr = 2;
+        int64 port=3;
+        google.protobuf.Duration timeout = 4;
+        int64 max_recv_msg_size = 5;
+        int64 max_send_msg_size = 6;
+        int64 max_concurrent_streams= 7;
+    }
+    HTTP http = 1;
+    GRPC grpc = 2;
+}
+
+message Data {
+    message Database {
+        string driver = 1;
+        string host = 2;
+        int64 port = 3;
+        string defaultdb = 4;
+        string coll_user = 5;
+        string coll_secrets = 6;
+        string coll_token = 7;
+        string user = 8;
+        string password = 9;
+        google.protobuf.Duration timeout = 10;
+    }
+    Database database = 1;
+}
+
+enum Loglevel{
+	Info   = 0;
+	Warn  = 4;
+	Error  = 8;
+    Debug  = -4;
+}
+

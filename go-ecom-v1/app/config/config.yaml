@@ -1,0 +1,21 @@
+trace:
+  endpoint: http://127.0.0.1:14268/api/traces
+  level: -4
+server:
+  http:
+    port: 6777
+    timeout: 1s
+  grpc:
+    port: 16777
+    timeout: 20s
+    max_recv_msg_size: 20971520
+    max_send_msg_size: 20971520
+    max_concurrent_streams: 1000
+data:
+  database:
+    driver: mongodb
+    host: localhost
+    port: 27017
+    defaultdb: ecom
+    coll_user: product
+    timeout: 10s

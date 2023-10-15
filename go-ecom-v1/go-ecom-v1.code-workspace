@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "go-ecom-v1",
+			"path": "."
+		},
+		{
+			"name": "third_party",
+			"path": "../../go/user_manager_1/third_party"
+		}
+	],
+	"settings": {}
+}
